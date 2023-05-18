@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">ActivityPlanner</string>
+    <string name="title_home">Calendar</string>
+    <string name="title_dashboard">List</string>
+    <string name="title_notifications">Settings</string>
+    <string name="search_hint">Activity name</string>
+    <string name="activity_type_work">Work</string>
+    <string name="activity_type_free_time">Free time</string>
+    <string name="activity_type_travel">Travel</string>
+    <string name="no_items">There are no activities.</string>
+    <string name="activity_title">Title</string>
+    <string name="activity_description">Description</string>
+    <string name="activity_date">Choose Date</string>
+    <string name="activity_time">Choose Time</string>
+    <string name="activity_location">Choose Location</string>
+    <string name="activity_type">Choose Type</string>
+    <string name="new_activity_title">New Activity</string>
+    <string name="next_button">Next</string>
+    <string name="select_date">Select Date</string>
+    <string name="select_time">Select Time</string>
+    <string-array name="activity_types">
+        <item>@string/activity_type_work</item>
+        <item>@string/activity_type_free_time</item>
+        <item>@string/activity_type_travel</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+</resources>
