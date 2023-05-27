@@ -2,14 +2,17 @@ package com.example.activityplanner.database.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+import androidx.room.Room;
 
 import com.example.activityplanner.util.Constants;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity(tableName = Constants.TABLE_NAME_PICTURE)
-public class Picture {
+public class Picture implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
@@ -41,6 +44,10 @@ public class Picture {
 
     public void setActivityId(long activityId) {
         this.activityId = activityId;
+    }
+
+    public Picture(String uri) {
+        this.uri = uri;
     }
 
     @Override

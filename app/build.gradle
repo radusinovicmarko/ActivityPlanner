@@ -43,6 +43,10 @@ dependencies {
     implementation 'com.google.android.libraries.places:places:3.1.0'
 
     implementation 'androidx.room:room-runtime:2.5.1'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.applandeo:material-calendar-view:1.9.0-rc03'
+    implementation 'com.squareup.picasso:picasso:2.8'
+    implementation 'androidx.preference:preference:1.2.0'
     annotationProcessor 'androidx.room:room-compiler:2.5.1'
 
     testImplementation 'junit:junit:4.13.2'

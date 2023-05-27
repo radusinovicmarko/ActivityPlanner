@@ -1,5 +1,6 @@
 package com.example.activityplanner.ui.dashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,8 @@ import com.example.activityplanner.database.entities.Activity;
 import com.example.activityplanner.databinding.FragmentDashboardBinding;
 import com.example.activityplanner.services.RetrieveAllByTitleTask;
 import com.example.activityplanner.services.RetrieveAllTask;
+import com.example.activityplanner.ui.DetailsActivity;
+import com.example.activityplanner.ui.NewActivityActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,7 @@ public class DashboardFragment extends Fragment {
     private ActivityAdapter adapter;
     private int position;
     private TextView noItemsTv;
+    private static final String ACTIVITY_ARG = "Activity";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -48,10 +52,14 @@ public class DashboardFragment extends Fragment {
         noItemsTv = binding.noItemsTv;
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         activities = new ArrayList<>();
-        adapter = new ActivityAdapter(activities, getContext(), (position) -> Toast.makeText(getContext(), "Click", Toast.LENGTH_LONG));
+        adapter = new ActivityAdapter(activities, getContext(), (position) -> {
+            Intent intent = new Intent(getContext(), DetailsActivity.class);
+            intent.putExtra(ACTIVITY_ARG, activities.get(position));
+            startActivity(intent);
+        });
         recyclerView.setAdapter(adapter);
         plannerDatabase = PlannerDatabase.getInstance(getContext());
-        new RetrieveAllTask(this).execute();
+        //new RetrieveAllTask(this).execute();
 
         SearchView searchView = binding.activitySearchView;
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -62,10 +70,16 @@ public class DashboardFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                new RetrieveAllByTitleTask(DashboardFragment.this).execute(newText);
+                //new RetrieveAllByTitleTask(DashboardFragment.this).execute(newText);
                 return false;
             }
         });
+
+        binding.fabAdd.setOnClickListener(view -> {
+            Intent i = new Intent(getActivity(), NewActivityActivity.class);
+            startActivity(i);
+        });
+
         return root;
     }
 

@@ -7,11 +7,12 @@ import androidx.room.PrimaryKey;
 import com.example.activityplanner.database.enums.ActivityType;
 import com.example.activityplanner.util.Constants;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity(tableName = Constants.TABLE_NAME_ACTIVITY)
-public class Activity {
+public class Activity implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private long id;

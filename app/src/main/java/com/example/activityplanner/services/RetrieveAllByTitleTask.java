@@ -4,15 +4,16 @@ import android.os.AsyncTask;
 import android.view.View;
 
 import com.example.activityplanner.database.dto.ActivityWithPictures;
+import com.example.activityplanner.ui.ListFragment;
 import com.example.activityplanner.ui.dashboard.DashboardFragment;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class RetrieveAllByTitleTask extends AsyncTask<String, Void, List<ActivityWithPictures>> {
-    private WeakReference<DashboardFragment> fragmentReference;
+    private WeakReference<ListFragment> fragmentReference;
 
-    public RetrieveAllByTitleTask(DashboardFragment fragment) {
+    public RetrieveAllByTitleTask(ListFragment fragment) {
         fragmentReference = new WeakReference<>(fragment);
     }
 
