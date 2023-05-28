@@ -23,11 +23,16 @@ import com.example.activityplanner.R;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -155,17 +160,43 @@ public class AddPicturesActivity extends AppCompatActivity {
                         ClipData clipData = data.getClipData();
                         int count = clipData.getItemCount();
                         for (int i = 0; i < count; i++) {
-                            pictureUris.add(clipData.getItemAt(i).getUri().toString());
+                            Uri uri = clipData.getItemAt(i).getUri();
+                            String savedPath = saveImage(uri);
+                            if (savedPath != null) {
+                                String path = "file://" + saveImage(uri);
+                                pictureUris.add(path);
+                            }
                         }
                         Toast.makeText(this, R.string.picture_uploaded, Toast.LENGTH_SHORT).show();
                         loadCarousel();
                     } else if (data != null && data.getData() != null) {
-                        pictureUris.add(data.getData().toString());
+                        Uri uri = data.getData();
+                        String path = "file://" +  saveImage(uri);
+                        pictureUris.add(path);
                         Toast.makeText(this, R.string.picture_uploaded, Toast.LENGTH_SHORT).show();
                         loadCarousel();
                     }
                 }
             });
+
+    private String saveImage(Uri uri) {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmssSS").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_.jpg";
+        try (OutputStream outputStream = new FileOutputStream(new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), imageFileName));
+             InputStream inputStream = getContentResolver().openInputStream(uri)) {
+
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+
+            return new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), imageFileName).getAbsolutePath();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     private void loadCarousel() {
         if (pictureUris.size() == 0) {
@@ -174,8 +205,6 @@ public class AddPicturesActivity extends AppCompatActivity {
         else {
             findViewById(R.id.carousel).setVisibility(View.VISIBLE);
             ImageView imageView = findViewById(R.id.imageView);
-            //TODO: delete comment
-            //imageView.setImageURI(Uri.parse(pictureUris.get(currentIndex)));
             Picasso.get().load(pictureUris.get(currentIndex)).into(imageView);
         }
     }

@@ -50,9 +50,11 @@
 
     <string name="language_preference">Select a language</string>
     <string name="language_preference_key" translatable="false">language</string>
+    <string name="language_preference_default" translatable="false">sr</string>
 
     <string name="notifications_preference">Select notification period</string>
-    <string name="notifications_preference_key">notifications</string>
+    <string name="notifications_preference_key" translatable="false">notifications</string>
+    <string name="notifications_preference_default" translatable="false">0</string>
     <string name="notifications_off">Off</string>
     <string name="notifications_hour">1 hour</string>
     <string name="notifications_day">1 day</string>

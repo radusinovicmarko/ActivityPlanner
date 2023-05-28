@@ -2,6 +2,7 @@ package com.example.activityplanner.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -100,9 +101,8 @@ public class DetailsActivity extends AppCompatActivity {
         else {
             findViewById(R.id.carousel).setVisibility(View.VISIBLE);
             ImageView imageView = findViewById(R.id.imageView);
-            //TODO: delete comment
-            //imageView.setImageURI(Uri.parse(pictureUris.get(currentIndex)));
             Picasso.get().load(pictures.get(currentIndex).getUri()).into(imageView);
+
         }
     }
 }

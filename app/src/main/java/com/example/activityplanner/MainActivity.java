@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String optionString = sharedPreferences.getString(getResources().getString(R.string.notifications_preference_key), "0");
+        String optionString = sharedPreferences.getString(getResources().getString(R.string.notifications_preference_key), getResources().getString(R.string.notifications_preference_default));
         NotificationOption option = NotificationOption.values()[Integer.parseInt(optionString)];
         if (option != NotificationOption.OFF) {
             sendNotification(option);
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         }
         to = calendar.getTime();
         new RetrieveAllByDate(PlannerDatabase.getInstance(this), activities -> {
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.container), getResources().getString(R.string.notifications_text, activities.size()), Snackbar.ANIMATION_MODE_SLIDE)
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.container), getResources().getString(R.string.notifications_text, activities.size()), Snackbar.LENGTH_SHORT)
                     .setBackgroundTint(getColor(R.color.purple_500))
                     .setActionTextColor(getColor(R.color.white));
             if (activities.size() > 0) {
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setLocale(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        String language = sharedPreferences.getString("language", "sr");
+        String language = sharedPreferences.getString("language", context.getResources().getString(R.string.language_preference_default));
         Locale locale = new Locale(language);
         Locale.setDefault(locale);
         Configuration config = context.getResources().getConfiguration();

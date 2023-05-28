@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">Activity Planner</string>
+    <string name="title_home">Kalendar</string>
+    <string name="title_dashboard">Lista</string>
+    <string name="title_settings">Podešavanja</string>
+    <string name="search_hint">Naziv</string>
+    <string name="activity_type_work">Posao</string>
+    <string name="activity_type_free_time">Slobodno vrijeme</string>
+    <string name="activity_type_travel">Putovanje</string>
+    <string name="no_items">Nema aktivnosti.</string>
+    <string name="activity_title">Naziv</string>
+    <string name="activity_description">Opis</string>
+    <string name="activity_date">Izaberite datum</string>
+    <string name="activity_time">Izaberite vrijeme</string>
+    <string name="activity_location">Izaberite lokaciju</string>
+    <string name="activity_type">Izaberite tip</string>
+    <string name="new_activity_title">Nova aktivnost</string>
+    <string name="next_button">Dalje</string>
+    <string name="select_date">Izaberite datum</string>
+    <string name="select_time">Izaberite vrijeme</string>
+    <string-array name="activity_types">
+        <item>@string/activity_type_work</item>
+        <item>@string/activity_type_free_time</item>
+        <item>@string/activity_type_travel</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="add_activity_button">Dodajte aktivnost</string>
+    <string name="add_pictures_button">Dodajte slike</string>
+    <string name="previous">Prije</string>
+    <string name="create_activity_error">Nedostaju polja.</string>
+    <string name="activity_created">Aktivnost kreirana.</string>
+    <string name="details_location">Lokacija: %s</string>
+    <string name="date_selected">Izabrani datum: %s</string>
+    <string name="map_marker">Marker za %s</string>
+    <string name="add_pictures_title">Dodavanje slika</string>
+    <string name="url_hint">URL</string>
+    <string name="url_button">Otpremite preko URL-a</string>
+    <string name="upload_button">Otpremite sa uređaja</string>
+    <string name="camera_btn">Otpremite pomoću kamere</string>
+    <string name="finish_btn">Kraj</string>
+    <string name="picture_uploaded">Slika otpremljena!</string>
+    <string name="picture_delete_btn">Obrišite sliku</string>
+    <string name="activity_delete_btn">Obrišite aktivnost</string>
+    <string name="activity_deleted">Aktivnost obrisana!</string>
+
+    <string name="language_preference">Izaberite jezik</string>
+
+    <string name="notifications_preference">Izaberite period obavještenja</string>
+    <string name="notifications_off">Isključeno</string>
+    <string name="notifications_hour">1 sat</string>
+    <string name="notifications_day">1 dan</string>
+    <string name="notifications_week">1 sedmica</string>
+
+    <string name="notifications_text">Aktivnosti uskoro: %d!</string>
+
+    <string name="snackbar_btn">Pogledajte</string>
+    <string name="upcoming_title">Aktivnosti uskoro</string>
+</resources>
