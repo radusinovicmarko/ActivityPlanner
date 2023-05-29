@@ -68,6 +68,7 @@ public class HomeFragment extends Fragment {
         RecyclerView recyclerView = binding.activityList;
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
+        //TODO: On back from details activity change list
         calendarView.setOnDayClickListener(eventDay -> {
             Date date = eventDay.getCalendar().getTime();
             binding.dateSelectedTV.setText(getResources().getString(R.string.date_selected, new SimpleDateFormat("dd. MM. yyyy.").format(date)));

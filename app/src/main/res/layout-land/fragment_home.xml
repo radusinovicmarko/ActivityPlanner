@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="?actionBarSize"
+    android:orientation="horizontal"
+    android:weightSum="2"
+    tools:context=".ui.HomeFragment">
+
+    <com.applandeo.materialcalendarview.CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:firstDayOfWeek="monday"
+        app:headerColor="@color/purple_500"
+        app:todayLabelColor="@color/teal_200" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/dateSelectedTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/list_margin"
+            android:textSize="@dimen/home_selected_text_size"
+            android:background="@color/purple_500"
+            android:textColor="@color/white"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/activityList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/list_margin"
+            android:layout_marginTop="@dimen/list_margin"
+            android:nestedScrollingEnabled="false"
+            android:scrollbars="vertical" />
+
+        <TextView
+            android:id="@+id/noItemsTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/search_view_margin"
+            android:text="@string/no_items"
+            android:textAlignment="center"
+            android:textSize="@dimen/no_item_text_size"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</LinearLayout>
