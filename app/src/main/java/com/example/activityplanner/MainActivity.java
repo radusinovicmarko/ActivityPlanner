@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -17,6 +19,7 @@ import com.example.activityplanner.database.PlannerDatabase;
 import com.example.activityplanner.database.enums.NotificationOption;
 import com.example.activityplanner.databinding.ActivityMainBinding;
 import com.example.activityplanner.services.RetrieveAllByDate;
+import com.example.activityplanner.ui.NewActivityActivity;
 import com.example.activityplanner.ui.UpcomingActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -44,6 +48,18 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+        navController.addOnDestinationChangedListener((navController1, navDestination, bundle) -> {
+            if (navDestination.getId() == R.id.navigation_settings) {
+                findViewById(R.id.fabAdd).setVisibility(View.GONE);
+            } else {
+                findViewById(R.id.fabAdd).setVisibility(View.VISIBLE);
+            }
+        });
+
+        findViewById(R.id.fabAdd).setOnClickListener(view -> {
+            Intent i = new Intent(this, NewActivityActivity.class);
+            startActivity(i);
+        });
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String optionString = sharedPreferences.getString(getResources().getString(R.string.notifications_preference_key), getResources().getString(R.string.notifications_preference_default));
@@ -69,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         }
         to = calendar.getTime();
         new RetrieveAllByDate(PlannerDatabase.getInstance(this), activities -> {
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.container), getResources().getString(R.string.notifications_text, activities.size()), Snackbar.LENGTH_SHORT)
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.coordinator), getResources().getString(R.string.notifications_text, activities.size()), Snackbar.LENGTH_SHORT)
                     .setBackgroundTint(getColor(R.color.purple_500))
                     .setActionTextColor(getColor(R.color.white));
             if (activities.size() > 0) {

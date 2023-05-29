@@ -71,11 +71,6 @@ public class ListFragment extends Fragment {
             }
         });
 
-        binding.fabAdd.setOnClickListener(view -> {
-            Intent i = new Intent(getActivity(), NewActivityActivity.class);
-            startActivity(i);
-        });
-
         return root;
     }
 
@@ -83,6 +78,12 @@ public class ListFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        new RetrieveAllTask(this).execute();
     }
 
     public PlannerDatabase getPlannerDatabase() {

@@ -38,6 +38,8 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
+    private PlannerDatabase database;
+    private CalendarView calendarView;
     private static final String ACTIVITY_ARG = "Activity";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -46,13 +48,11 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        PlannerDatabase database = PlannerDatabase.getInstance(getContext());
+        database = PlannerDatabase.getInstance(getContext());
 
-        CalendarView calendarView = binding.calendarView;
+        calendarView = binding.calendarView;
+
         List<EventDay> events = new ArrayList<>();
-
-        RecyclerView recyclerView = binding.activityList;
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         new RetrieveAllTask(activities -> {
             for (ActivityWithPictures activityWithPictures : activities) {
@@ -64,6 +64,9 @@ public class HomeFragment extends Fragment {
             }
             calendarView.setEvents(events);
         }, database).execute();
+
+        RecyclerView recyclerView = binding.activityList;
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         calendarView.setOnDayClickListener(eventDay -> {
             Date date = eventDay.getCalendar().getTime();
@@ -92,12 +95,23 @@ public class HomeFragment extends Fragment {
             }).execute(from, to);
         });
 
-        binding.fabAdd.setOnClickListener(view -> {
-            Intent i = new Intent(getActivity(), NewActivityActivity.class);
-            startActivity(i);
-        });
-
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        List<EventDay> events = new ArrayList<>();
+        new RetrieveAllTask(activities -> {
+            for (ActivityWithPictures activityWithPictures : activities) {
+                Activity activity = activityWithPictures.getActivity();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(activity.getDate());
+                EventDay eventDay = new EventDay(calendar, R.drawable.ic_shortcut_fiber_manual_record);
+                events.add(eventDay);
+            }
+            calendarView.setEvents(events);
+        }, database).execute();
     }
 
     @Override
