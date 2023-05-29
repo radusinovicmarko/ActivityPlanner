@@ -2,7 +2,7 @@
 
     <ListPreference
         app:defaultValue="sr"
-        app:icon="@drawable/ic_translate_icon"
+        app:icon="?attr/translate_icon"
         app:entries="@array/language_entries"
         app:entryValues="@array/language_values"
         app:key="@string/language_preference_key"
@@ -11,7 +11,7 @@
 
     <ListPreference
         app:defaultValue="0"
-        app:icon="?android:attr/icon"
+        app:icon="?attr/notifications_icon"
         app:entries="@array/notifications_entries"
         app:entryValues="@array/notifications_values"
         app:key="@string/notifications_preference_key"

@@ -75,7 +75,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/materialDivider2"
-        app:drawableLeftCompat="@drawable/ic_date_range" />
+        app:drawableLeftCompat="?attr/calendar_icon" />
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/materialDivider3"
@@ -97,7 +97,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialDivider3"
-        app:drawableLeftCompat="@drawable/ic_access_time" />
+        app:drawableLeftCompat="?attr/time_icon" />
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/materialDivider4"
@@ -119,7 +119,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialDivider4"
-        app:drawableLeftCompat="@drawable/ic_location_on" />
+        app:drawableLeftCompat="?attr/location_icon" />
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/materialDivider5"

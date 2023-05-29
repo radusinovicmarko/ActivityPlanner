@@ -2,18 +2,17 @@ package com.example.activityplanner.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.applandeo.materialcalendarview.CalendarDay;
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.example.activityplanner.R;
@@ -24,16 +23,13 @@ import com.example.activityplanner.database.entities.Activity;
 import com.example.activityplanner.databinding.FragmentHomeBinding;
 import com.example.activityplanner.services.RetrieveAllByDate;
 import com.example.activityplanner.services.RetrieveAllTask;
-import com.example.activityplanner.ui.DetailsActivity;
-import com.example.activityplanner.ui.NewActivityActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class HomeFragment extends Fragment {
 
@@ -52,18 +48,7 @@ public class HomeFragment extends Fragment {
 
         calendarView = binding.calendarView;
 
-        List<EventDay> events = new ArrayList<>();
-
-        new RetrieveAllTask(activities -> {
-            for (ActivityWithPictures activityWithPictures : activities) {
-                Activity activity = activityWithPictures.getActivity();
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(activity.getDate());
-                EventDay eventDay = new EventDay(calendar, R.drawable.ic_shortcut_fiber_manual_record);
-                events.add(eventDay);
-            }
-            calendarView.setEvents(events);
-        }, database).execute();
+        new RetrieveAllTask(this::listEvents, database).execute();
 
         RecyclerView recyclerView = binding.activityList;
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -71,6 +56,7 @@ public class HomeFragment extends Fragment {
         //TODO: On back from details activity change list
         calendarView.setOnDayClickListener(eventDay -> {
             Date date = eventDay.getCalendar().getTime();
+            binding.dateSelectedTV.setVisibility(View.VISIBLE);
             binding.dateSelectedTV.setText(getResources().getString(R.string.date_selected, new SimpleDateFormat("dd. MM. yyyy.").format(date)));
             Date from = new Date(date.getTime());
             from.setHours(0);
@@ -99,20 +85,24 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+    private void listEvents(List<ActivityWithPictures> activities) {
+        List<EventDay> events = new ArrayList<>();
+        for (ActivityWithPictures activityWithPictures : activities) {
+            Activity activity = activityWithPictures.getActivity();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(activity.getDate());
+            TypedValue typedValue = new TypedValue();
+            requireContext().getTheme().resolveAttribute(R.attr.circle_icon, typedValue, true);
+            EventDay eventDay = new EventDay(calendar, Objects.requireNonNull(ContextCompat.getDrawable(requireContext(), typedValue.resourceId)));
+            events.add(eventDay);
+        }
+        calendarView.setEvents(events);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
-        List<EventDay> events = new ArrayList<>();
-        new RetrieveAllTask(activities -> {
-            for (ActivityWithPictures activityWithPictures : activities) {
-                Activity activity = activityWithPictures.getActivity();
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(activity.getDate());
-                EventDay eventDay = new EventDay(calendar, R.drawable.ic_shortcut_fiber_manual_record);
-                events.add(eventDay);
-            }
-            calendarView.setEvents(events);
-        }, database).execute();
+        new RetrieveAllTask(this::listEvents, database).execute();
     }
 
     @Override

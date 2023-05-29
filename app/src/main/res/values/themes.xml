@@ -12,7 +12,14 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:icon">@drawable/ic_notifications_icon</item>
+        <item name="notifications_icon">@drawable/ic_notifications_icon</item>
+        <item name="translate_icon">@drawable/ic_translate_icon</item>
+        <item name="calendar_icon">@drawable/ic_calendar</item>
+        <item name="time_icon">@drawable/ic_time</item>
+        <item name="location_icon">@drawable/ic_location</item>
+        <item name="circle_icon">@drawable/ic_circle</item>
+        <item name="left_arrow_icon">@drawable/ic_left_arrow</item>
+        <item name="right_arrow_icon">@drawable/ic_right_arrow</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -23,6 +30,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
 
     <style name="Theme.ActivityPlanner.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

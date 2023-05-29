@@ -12,11 +12,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:firstDayOfWeek="monday"
-            app:headerColor="@color/purple_500"
+            app:headerColor="?attr/colorPrimary"
+            app:pagesColor="?attr/colorSurface"
+            app:daysLabelsColor="?attr/colorOnSurface"
+            app:abbreviationsBarColor="?attr/colorSurface"
+            app:abbreviationsLabelsColor="?attr/colorOnSurface"
+            app:selectionColor="?attr/colorPrimary"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:todayLabelColor="@color/teal_200" />
+            app:todayLabelColor="?attr/colorSecondary"/>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/materialDivider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/form_item_margin_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 
         <TextView
             android:id="@+id/dateSelectedTV"
@@ -24,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/list_margin"
             android:textSize="@dimen/home_selected_text_size"
-            app:layout_constraintTop_toBottomOf="@id/calendarView" />
+            app:layout_constraintTop_toBottomOf="@id/materialDivider" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/activityList"

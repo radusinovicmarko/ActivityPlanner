@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.activityplanner.R;
 
-import java.util.Objects;
-
 public class SettingsFragment extends Fragment {
 
     @Override

@@ -1,18 +1,16 @@
 package com.example.activityplanner.ui;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.TextView;
 
 import com.example.activityplanner.R;
 import com.example.activityplanner.adapter.ActivityAdapter;
 import com.example.activityplanner.database.dto.ActivityWithPictures;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UpcomingActivity extends AppCompatActivity {

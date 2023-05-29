@@ -12,6 +12,13 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:icon">@drawable/ic_notifications_icon_dark</item>
+        <item name="notifications_icon">@drawable/ic_notifications_icon_dark</item>
+        <item name="translate_icon">@drawable/ic_translate_icon_dark</item>
+        <item name="calendar_icon">@drawable/ic_calendar_dark</item>
+        <item name="time_icon">@drawable/ic_time_dark</item>
+        <item name="location_icon">@drawable/ic_location_dark</item>
+        <item name="circle_icon">@drawable/ic_circle_dark</item>
+        <item name="left_arrow_icon">@drawable/ic_left_arrow_dark</item>
+        <item name="right_arrow_icon">@drawable/ic_right_arrow_dark</item>
     </style>
 </resources>

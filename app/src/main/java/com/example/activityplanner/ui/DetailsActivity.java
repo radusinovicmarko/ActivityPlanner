@@ -1,14 +1,12 @@
 package com.example.activityplanner.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.activityplanner.R;
 import com.example.activityplanner.database.PlannerDatabase;
@@ -86,12 +84,10 @@ public class DetailsActivity extends AppCompatActivity {
             });
         }
 
-        findViewById(R.id.fabDelete).setOnClickListener(view -> {
-            new DeleteActivityTask(PlannerDatabase.getInstance(this), () -> {
-                Toast.makeText(this, R.string.activity_deleted, Toast.LENGTH_SHORT).show();
-                finish();
-            }).execute(activity);
-        });
+        findViewById(R.id.fabDelete).setOnClickListener(view -> new DeleteActivityTask(PlannerDatabase.getInstance(this), () -> {
+            Toast.makeText(this, R.string.activity_deleted, Toast.LENGTH_SHORT).show();
+            finish();
+        }).execute(activity));
 
     }
 

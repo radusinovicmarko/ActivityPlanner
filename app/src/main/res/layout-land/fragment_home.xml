@@ -15,8 +15,13 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         app:firstDayOfWeek="monday"
-        app:headerColor="@color/purple_500"
-        app:todayLabelColor="@color/teal_200" />
+        app:headerColor="?attr/colorPrimary"
+        app:pagesColor="?attr/colorSurface"
+        app:daysLabelsColor="?attr/colorOnSurface"
+        app:abbreviationsBarColor="?attr/colorSurface"
+        app:abbreviationsLabelsColor="?attr/colorOnSurface"
+        app:selectionColor="?attr/colorPrimary"
+        app:todayLabelColor="?attr/colorSecondary" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -30,8 +35,9 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/list_margin"
             android:textSize="@dimen/home_selected_text_size"
-            android:background="@color/purple_500"
-            android:textColor="@color/white"/>
+            android:visibility="gone"
+            android:background="?attr/colorPrimary"
+            android:textColor="?attr/colorOnPrimary"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/activityList"

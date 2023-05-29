@@ -118,9 +118,8 @@
                 android:id="@+id/leftBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_shortcut_chevron_left"/>
+                android:src="?attr/left_arrow_icon"/>
 
             <ImageView
                 android:id="@+id/imageView"
@@ -133,9 +132,8 @@
                 android:id="@+id/rightBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_shortcut_keyboard_arrow_right"/>
+                android:src="?attr/right_arrow_icon"/>
 
         </LinearLayout>
 

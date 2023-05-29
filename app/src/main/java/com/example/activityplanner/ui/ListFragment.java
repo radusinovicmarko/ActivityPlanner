@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,7 +29,6 @@ public class ListFragment extends Fragment {
     private PlannerDatabase plannerDatabase;
     private List<ActivityWithPictures> activities;
     private ActivityAdapter adapter;
-    private int position;
     private TextView noItemsTv;
     private static final String ACTIVITY_ARG = "Activity";
 
@@ -38,7 +38,7 @@ public class ListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="notifications_icon" format="reference"/>
+    <attr name="translate_icon" format="reference"/>
+    <attr name="calendar_icon" format="reference"/>
+    <attr name="time_icon" format="reference"/>
+    <attr name="location_icon" format="reference"/>
+    <attr name="circle_icon" format="reference"/>
+    <attr name="left_arrow_icon" format="reference"/>
+    <attr name="right_arrow_icon" format="reference"/>
+</resources>
