@@ -67,6 +67,7 @@ public class DetailsActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putDouble("lat", activity.getActivity().getLocationLatitude());
             bundle.putDouble("long", activity.getActivity().getLocationLongitude());
+            bundle.putString("name", activity.getActivity().getLocationName());
 
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)

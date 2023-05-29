@@ -6,12 +6,17 @@
     <dimen name="search_view_margin">16dp</dimen>
     <dimen name="list_margin">16dp</dimen>
     <dimen name="card_item_layout_margin">5dp</dimen>
-    <dimen name="no_item_text_size">30sp</dimen>
+    <dimen name="no_item_text_size">26sp</dimen>
     <dimen name="form_item_margin_top">10dp</dimen>
     <dimen name="form_item_text_size">20sp</dimen>
     <dimen name="details_padding">20dp</dimen>
-    <dimen name="details_title_size">30sp</dimen>
-    <dimen name="details_description_size">20sp</dimen>
+    <dimen name="activity_content_text_size">20sp</dimen>
     <dimen name="details_margin_top">10dp</dimen>
     <dimen name="image_height">300dp</dimen>
+    <dimen name="home_selected_text_size">18sp</dimen>
+    <dimen name="activity_title_size">28sp</dimen>
+    <dimen name="carousel_margin_top">16dp</dimen>
+    <dimen name="activity_date_text_size">18sp</dimen>
+    <dimen name="chip_margin_start">5dp</dimen>
+    <dimen name="new_activity_padding">20dp</dimen>
 </resources>

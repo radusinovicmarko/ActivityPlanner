@@ -21,6 +21,7 @@ public class MapsFragment extends Fragment {
 
     private double lat;
     private double longitude;
+    private String name;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -36,7 +37,7 @@ public class MapsFragment extends Fragment {
         @Override
         public void onMapReady(GoogleMap googleMap) {
             LatLng location = new LatLng(lat, longitude);
-            //googleMap.addMarker(new MarkerOptions().position(location).title(getResources().getString(R.string.map_marker, )));
+            googleMap.addMarker(new MarkerOptions().position(location).title(getResources().getString(R.string.map_marker, name)));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
         }
     };
@@ -57,6 +58,7 @@ public class MapsFragment extends Fragment {
 
         lat = requireArguments().getDouble("lat");
         longitude = requireArguments().getDouble("long");
+        name = requireArguments().getString("name");
 
         if (mapFragment != null) {
             mapFragment.getMapAsync(callback);

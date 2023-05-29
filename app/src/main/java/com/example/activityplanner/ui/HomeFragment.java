@@ -1,4 +1,4 @@
-package com.example.activityplanner.ui.home;
+package com.example.activityplanner.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,8 +42,6 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -99,8 +97,6 @@ public class HomeFragment extends Fragment {
             startActivity(i);
         });
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
