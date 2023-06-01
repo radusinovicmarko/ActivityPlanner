@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class RetrieveAllByDate extends AsyncTask<Date, Void, List<ActivityWithPictures>> {
-    private PlannerDatabase database;
-    private Consumer<List<ActivityWithPictures>> callback;
+    private final PlannerDatabase database;
+    private final Consumer<List<ActivityWithPictures>> onPostExecuteCallback;
 
-    public RetrieveAllByDate(PlannerDatabase database, Consumer<List<ActivityWithPictures>> callback) {
+    public RetrieveAllByDate(PlannerDatabase database, Consumer<List<ActivityWithPictures>> onPostExecuteCallback) {
         this.database = database;
-        this.callback = callback;
+        this.onPostExecuteCallback = onPostExecuteCallback;
     }
 
     @Override
@@ -26,6 +26,6 @@ public class RetrieveAllByDate extends AsyncTask<Date, Void, List<ActivityWithPi
     @Override
     protected void onPostExecute(List<ActivityWithPictures> activities) {
         super.onPostExecute(activities);
-        callback.accept(activities);
+        onPostExecuteCallback.accept(activities);
     }
 }

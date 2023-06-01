@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -77,12 +78,14 @@ public class AddPicturesActivity extends AppCompatActivity {
     private void addPictureFromUrl(View view) {
         EditText urlET = findViewById(R.id.urlET);
         String uri = String.valueOf(urlET.getText());
-        if (!uri.isEmpty()) {
+        if (!uri.isEmpty() && Patterns.WEB_URL.matcher(uri).matches()) {
             Picasso.get().load(uri);
             pictureUris.add(uri);
             ((EditText) findViewById(R.id.urlET)).setText("");
             Toast.makeText(this, R.string.picture_uploaded, Toast.LENGTH_SHORT).show();
             loadCarousel();
+        } else {
+            Toast.makeText(this, R.string.invalid_url, Toast.LENGTH_SHORT).show();
         }
     }
 

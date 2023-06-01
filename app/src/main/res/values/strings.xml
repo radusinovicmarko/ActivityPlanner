@@ -41,6 +41,7 @@
     <string name="picture_delete_btn">Delete Picture</string>
     <string name="activity_delete_btn">Delete Activity</string>
     <string name="activity_deleted">Activity deleted!</string>
+    <string name="invalid_url">Invalid URL.</string>
 
     <string name="language_preference">Select a language</string>
     <string name="language_preference_key" translatable="false">language</string>

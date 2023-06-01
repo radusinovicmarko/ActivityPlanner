@@ -28,10 +28,10 @@ public class ListFragment extends Fragment {
     private FragmentListBinding binding;
     private PlannerDatabase plannerDatabase;
     private List<ActivityWithPictures> activities;
-    private ActivityAdapter adapter;
     private TextView noItemsTv;
     private static final String ACTIVITY_ARG = "Activity";
     private String searchPattern;
+    private RecyclerView recyclerView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,19 +44,12 @@ public class ListFragment extends Fragment {
         binding = FragmentListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        RecyclerView recyclerView = binding.activityList;
+        recyclerView = binding.activityList;
         noItemsTv = binding.noItemsTv;
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        activities = new ArrayList<>();
 
-        adapter = new ActivityAdapter(activities, getContext(), (position) -> {
-            Intent intent = new Intent(getContext(), DetailsActivity.class);
-            intent.putExtra(ACTIVITY_ARG, activities.get(position));
-            startActivity(intent);
-        });
-        recyclerView.setAdapter(adapter);
         plannerDatabase = PlannerDatabase.getInstance(getContext());
-        new RetrieveAllTask(this).execute();
+        new RetrieveAllTask(this::getActivities, plannerDatabase).execute();
 
         SearchView searchView = binding.activitySearchView;
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -68,7 +61,7 @@ public class ListFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 searchPattern = newText;
-                new RetrieveAllByTitleTask(ListFragment.this).execute(newText);
+                new RetrieveAllByTitleTask(ListFragment.this::getActivities, plannerDatabase).execute(newText);
                 return false;
             }
         });
@@ -82,29 +75,27 @@ public class ListFragment extends Fragment {
         binding = null;
     }
 
+    private void getActivities(List<ActivityWithPictures> activities) {
+        if (activities != null && activities.size() > 0) {
+            noItemsTv.setVisibility(View.GONE);
+        } else {
+            noItemsTv.setVisibility(View.VISIBLE);
+        }
+        ActivityAdapter adapter = new ActivityAdapter(activities, getContext(), (position) -> {
+            Intent intent = new Intent(getContext(), DetailsActivity.class);
+            intent.putExtra(ACTIVITY_ARG, activities.get(position));
+            startActivity(intent);
+        });
+        recyclerView.setAdapter(adapter);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
         if (searchPattern != null) {
-            new RetrieveAllByTitleTask(ListFragment.this).execute(searchPattern);
+            new RetrieveAllByTitleTask(this::getActivities, plannerDatabase).execute(searchPattern);
         } else {
-            new RetrieveAllTask(this).execute();
+            new RetrieveAllTask(this::getActivities, plannerDatabase).execute();
         }
-    }
-
-    public PlannerDatabase getPlannerDatabase() {
-        return plannerDatabase;
-    }
-
-    public List<ActivityWithPictures> getActivities() {
-        return activities;
-    }
-
-    public ActivityAdapter getAdapter() {
-        return adapter;
-    }
-
-    public TextView getNoItemsTv() {
-        return noItemsTv;
     }
 }

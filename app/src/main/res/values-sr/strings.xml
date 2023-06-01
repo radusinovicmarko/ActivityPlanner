@@ -41,6 +41,7 @@
     <string name="picture_delete_btn">Obrišite sliku</string>
     <string name="activity_delete_btn">Obrišite aktivnost</string>
     <string name="activity_deleted">Aktivnost obrisana!</string>
+    <string name="invalid_url">Nevalidan URL.</string>
 
     <string name="language_preference">Izaberite jezik</string>
 

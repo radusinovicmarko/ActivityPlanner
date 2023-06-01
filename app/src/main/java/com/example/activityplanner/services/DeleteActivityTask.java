@@ -7,12 +7,12 @@ import com.example.activityplanner.database.dto.ActivityWithPictures;
 
 public class DeleteActivityTask extends AsyncTask<ActivityWithPictures, Void, Void> {
 
-    private PlannerDatabase database;
-    private Runnable callback;
+    private final PlannerDatabase database;
+    private final Runnable onPostExecuteCallback;
 
-    public DeleteActivityTask(PlannerDatabase database, Runnable callback) {
+    public DeleteActivityTask(PlannerDatabase database, Runnable onPostExecuteCallback) {
         this.database = database;
-        this.callback = callback;
+        this.onPostExecuteCallback = onPostExecuteCallback;
     }
 
     @Override
@@ -24,6 +24,6 @@ public class DeleteActivityTask extends AsyncTask<ActivityWithPictures, Void, Vo
     @Override
     protected void onPostExecute(Void unused) {
         super.onPostExecute(unused);
-        callback.run();
+        onPostExecuteCallback.run();
     }
 }

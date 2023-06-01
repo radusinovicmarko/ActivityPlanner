@@ -10,8 +10,8 @@ import java.util.List;
 
 public class InsertActivityTask extends AsyncTask<ActivityWithPictures, Void, Void> {
 
-    private Runnable onPostExecuteCallback;
-    private PlannerDatabase database;
+    private final Runnable onPostExecuteCallback;
+    private final PlannerDatabase database;
 
     public InsertActivityTask(Runnable onPostExecuteCallback, PlannerDatabase database) {
         this.onPostExecuteCallback = onPostExecuteCallback;
