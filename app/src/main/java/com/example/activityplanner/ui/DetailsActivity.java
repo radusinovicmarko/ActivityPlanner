@@ -1,5 +1,7 @@
 package com.example.activityplanner.ui;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -84,11 +86,14 @@ public class DetailsActivity extends AppCompatActivity {
             });
         }
 
-        findViewById(R.id.fabDelete).setOnClickListener(view -> new DeleteActivityTask(PlannerDatabase.getInstance(this), () -> {
-            Toast.makeText(this, R.string.activity_deleted, Toast.LENGTH_SHORT).show();
-            finish();
-        }).execute(activity));
-
+        findViewById(R.id.fabDelete).setOnClickListener(view -> new AlertDialog.Builder(this)
+                .setTitle(R.string.alert_delete_title)
+                .setMessage(R.string.alert_delete_message)
+                .setPositiveButton(android.R.string.yes, (dialog, whichButton) -> new DeleteActivityTask(PlannerDatabase.getInstance(this), () -> {
+                    Toast.makeText(this, R.string.activity_deleted, Toast.LENGTH_SHORT).show();
+                    finish();
+                }).execute(activity))
+                .setNegativeButton(android.R.string.no, null).show());
     }
 
     private void loadCarousel() {

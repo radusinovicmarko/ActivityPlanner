@@ -97,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
                 snackbar.setAction(R.string.snackbar_btn, view -> {
                     Intent intent = new Intent(this, UpcomingActivity.class);
                     intent.putExtra("activities", (Serializable) activities);
+                    intent.putExtra("from", from);
+                    intent.putExtra("to", to);
                     startActivity(intent);
                 });
             }

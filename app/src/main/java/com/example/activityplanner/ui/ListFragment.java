@@ -47,7 +47,7 @@ public class ListFragment extends Fragment {
         noItemsTv = binding.noItemsTv;
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         activities = new ArrayList<>();
-        //TODO: refresh on result
+
         adapter = new ActivityAdapter(activities, getContext(), (position) -> {
             Intent intent = new Intent(getContext(), DetailsActivity.class);
             intent.putExtra(ACTIVITY_ARG, activities.get(position));
