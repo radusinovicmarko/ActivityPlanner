@@ -6,7 +6,10 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -23,6 +26,7 @@ import com.example.activityplanner.database.entities.Activity;
 import com.example.activityplanner.databinding.FragmentHomeBinding;
 import com.example.activityplanner.services.RetrieveAllByDate;
 import com.example.activityplanner.services.RetrieveAllTask;
+import com.google.android.libraries.places.widget.Autocomplete;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,6 +41,9 @@ public class HomeFragment extends Fragment {
     private PlannerDatabase database;
     private CalendarView calendarView;
     private static final String ACTIVITY_ARG = "Activity";
+    private Date from;
+    private Date to;
+    private RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -50,7 +57,7 @@ public class HomeFragment extends Fragment {
 
         new RetrieveAllTask(this::listEvents, database).execute();
 
-        RecyclerView recyclerView = binding.activityList;
+        recyclerView = binding.activityList;
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         //TODO: On back from details activity change list
@@ -58,28 +65,14 @@ public class HomeFragment extends Fragment {
             Date date = eventDay.getCalendar().getTime();
             binding.dateSelectedTV.setVisibility(View.VISIBLE);
             binding.dateSelectedTV.setText(getResources().getString(R.string.date_selected, new SimpleDateFormat("dd. MM. yyyy.").format(date)));
-            Date from = new Date(date.getTime());
+            from = new Date(date.getTime());
             from.setHours(0);
             from.setMinutes(0);
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(from);
             calendar.add(Calendar.DAY_OF_YEAR, 1);
-            Date to = calendar.getTime();
-            new RetrieveAllByDate(database, activities -> {
-                if (activities.size() == 0) {
-                    recyclerView.setVisibility(View.GONE);
-                    binding.noItemsTv.setVisibility(View.VISIBLE);
-                } else {
-                    recyclerView.setVisibility(View.VISIBLE);
-                    binding.noItemsTv.setVisibility(View.GONE);
-                    ActivityAdapter adapter = new ActivityAdapter(activities, getContext(), (position) -> {
-                        Intent intent = new Intent(getContext(), DetailsActivity.class);
-                        intent.putExtra(ACTIVITY_ARG, activities.get(position));
-                        startActivity(intent);
-                    });
-                    recyclerView.setAdapter(adapter);
-                }
-            }).execute(from, to);
+            to = calendar.getTime();
+            new RetrieveAllByDate(database, this::listActivities).execute(from, to);
         });
 
         return root;
@@ -99,10 +92,32 @@ public class HomeFragment extends Fragment {
         calendarView.setEvents(events);
     }
 
+    private void listActivities(List<ActivityWithPictures> activities) {
+        if (activities.size() == 0) {
+            recyclerView.setVisibility(View.GONE);
+            binding.noItemsTv.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            binding.noItemsTv.setVisibility(View.GONE);
+            ActivityAdapter adapter = new ActivityAdapter(activities, getContext(), (position) -> {
+                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                intent.putExtra(ACTIVITY_ARG, activities.get(position));
+                startActivity(intent);
+            });
+            recyclerView.setAdapter(adapter);
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
+        binding.activityList.setVisibility(View.GONE);
         new RetrieveAllTask(this::listEvents, database).execute();
+        if (from != null && to != null) {
+            new RetrieveAllByDate(database, this::listActivities).execute(from, to);
+        } else {
+            binding.dateSelectedTV.setVisibility(View.GONE);
+        }
     }
 
     @Override

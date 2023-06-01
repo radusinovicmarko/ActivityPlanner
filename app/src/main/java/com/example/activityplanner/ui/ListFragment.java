@@ -31,6 +31,7 @@ public class ListFragment extends Fragment {
     private ActivityAdapter adapter;
     private TextView noItemsTv;
     private static final String ACTIVITY_ARG = "Activity";
+    private String searchPattern;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class ListFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                searchPattern = newText;
                 new RetrieveAllByTitleTask(ListFragment.this).execute(newText);
                 return false;
             }
@@ -83,7 +85,11 @@ public class ListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        new RetrieveAllTask(this).execute();
+        if (searchPattern != null) {
+            new RetrieveAllByTitleTask(ListFragment.this).execute(searchPattern);
+        } else {
+            new RetrieveAllTask(this).execute();
+        }
     }
 
     public PlannerDatabase getPlannerDatabase() {

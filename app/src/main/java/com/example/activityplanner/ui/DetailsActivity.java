@@ -91,6 +91,7 @@ public class DetailsActivity extends AppCompatActivity {
                 .setMessage(R.string.alert_delete_message)
                 .setPositiveButton(android.R.string.yes, (dialog, whichButton) -> new DeleteActivityTask(PlannerDatabase.getInstance(this), () -> {
                     Toast.makeText(this, R.string.activity_deleted, Toast.LENGTH_SHORT).show();
+                    setResult(RESULT_OK);
                     finish();
                 }).execute(activity))
                 .setNegativeButton(android.R.string.no, null).show());
