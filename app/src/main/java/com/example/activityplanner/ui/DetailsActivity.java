@@ -1,14 +1,18 @@
 package com.example.activityplanner.ui;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentContainerView;
 
 import com.example.activityplanner.R;
 import com.example.activityplanner.database.PlannerDatabase;
@@ -86,6 +90,13 @@ public class DetailsActivity extends AppCompatActivity {
             });
         }
 
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && (type == ActivityType.WORK || pictures.size() == 0 && type == ActivityType.FREE_TIME)) {
+            ScrollView scrollView = findViewById(R.id.landscapeScrollView);
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) scrollView.getLayoutParams();
+            params.weight = 2;
+            scrollView.setLayoutParams(params);
+        }
+
         findViewById(R.id.fabDelete).setOnClickListener(view -> new AlertDialog.Builder(this)
                 .setTitle(R.string.alert_delete_title)
                 .setMessage(R.string.alert_delete_message)
@@ -100,12 +111,10 @@ public class DetailsActivity extends AppCompatActivity {
     private void loadCarousel() {
         if (pictures.size() == 0) {
             findViewById(R.id.carousel).setVisibility(View.GONE);
-        }
-        else {
+        } else {
             findViewById(R.id.carousel).setVisibility(View.VISIBLE);
             ImageView imageView = findViewById(R.id.imageView);
             Picasso.get().load(pictures.get(currentIndex).getUri()).into(imageView);
-
         }
     }
 }
