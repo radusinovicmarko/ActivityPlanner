@@ -20,5 +20,6 @@
         <item name="circle_icon">@drawable/ic_circle_dark</item>
         <item name="left_arrow_icon">@drawable/ic_left_arrow_dark</item>
         <item name="right_arrow_icon">@drawable/ic_right_arrow_dark</item>
+        <item name="no_image_icon">@drawable/ic_no_image_dark</item>
     </style>
 </resources>

@@ -56,9 +56,9 @@ public class MapsFragment extends Fragment {
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
 
-        lat = requireArguments().getDouble("lat");
-        longitude = requireArguments().getDouble("long");
-        name = requireArguments().getString("name");
+        lat = requireArguments().getDouble(getResources().getString(R.string.bundle_extra_lat));
+        longitude = requireArguments().getDouble(getResources().getString(R.string.bundle_extra_long));
+        name = requireArguments().getString(getResources().getString(R.string.bundle_extra_name));
 
         if (mapFragment != null) {
             mapFragment.getMapAsync(callback);

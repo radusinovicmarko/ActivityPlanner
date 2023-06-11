@@ -23,7 +23,6 @@ public class MySettingsFragment extends PreferenceFragmentCompat implements Pref
         findPreference(getContext().getResources().getString(R.string.language_preference_key)).setOnPreferenceChangeListener(this);
     }
 
-    //TODO: Check if necessary
     @Override
     public boolean onPreferenceChange(Preference preference, Object o) {
         if (preference.getKey().equals(getContext().getResources().getString(R.string.language_preference_key))) {

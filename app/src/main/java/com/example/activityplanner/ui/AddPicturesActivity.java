@@ -1,9 +1,11 @@
 package com.example.activityplanner.ui;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -45,7 +47,7 @@ public class AddPicturesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_pictures);
 
-        pictureUris = (List<String>) getIntent().getSerializableExtra("pictures");
+        pictureUris = (List<String>) getIntent().getSerializableExtra(getResources().getString(R.string.intent_extra_pictures));
         loadCarousel();
 
         findViewById(R.id.urlBtn).setOnClickListener(this::addPictureFromUrl);
@@ -53,7 +55,7 @@ public class AddPicturesActivity extends AppCompatActivity {
         findViewById(R.id.cameraBtn).setOnClickListener(this::addPictureFromCamera);
         findViewById(R.id.finishBtn).setOnClickListener(view -> {
             Intent intent = new Intent();
-            intent.putExtra("pictures", (Serializable) pictureUris.stream().distinct().collect(Collectors.toList()));
+            intent.putExtra(getResources().getString(R.string.intent_extra_pictures), (Serializable) pictureUris.stream().distinct().collect(Collectors.toList()));
             setResult(RESULT_OK, intent);
             finish();
         });
@@ -74,7 +76,6 @@ public class AddPicturesActivity extends AppCompatActivity {
         });
     }
 
-    //TODO: check Internet connection
     private void addPictureFromUrl(View view) {
         EditText urlET = findViewById(R.id.urlET);
         String uri = String.valueOf(urlET.getText());
@@ -195,6 +196,7 @@ public class AddPicturesActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("ResourceType")
     private void loadCarousel() {
         if (pictureUris.size() == 0) {
             findViewById(R.id.carousel).setVisibility(View.GONE);
@@ -202,7 +204,12 @@ public class AddPicturesActivity extends AppCompatActivity {
         else {
             findViewById(R.id.carousel).setVisibility(View.VISIBLE);
             ImageView imageView = findViewById(R.id.imageView);
-            Picasso.get().load(pictureUris.get(currentIndex)).into(imageView);
+            int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+            if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
+                Picasso.get().load(pictureUris.get(currentIndex)).error(R.drawable.ic_no_image_dark).into(imageView);
+            } else {
+                Picasso.get().load(pictureUris.get(currentIndex)).error(R.drawable.ic_no_image).into(imageView);
+            }
         }
     }
 

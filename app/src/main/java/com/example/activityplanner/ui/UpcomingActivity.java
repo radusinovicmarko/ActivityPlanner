@@ -17,7 +17,6 @@ import java.util.Date;
 import java.util.List;
 
 public class UpcomingActivity extends AppCompatActivity {
-    private static final String ACTIVITY_ARG = "Activity";
     private Date from;
     private Date to;
     private RecyclerView recyclerView;
@@ -29,12 +28,12 @@ public class UpcomingActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.activityList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        List<ActivityWithPictures> activities = (List<ActivityWithPictures>) getIntent().getSerializableExtra("activities");
-        from = (Date) getIntent().getSerializableExtra("from");
-        to = (Date) getIntent().getSerializableExtra("to");
+        List<ActivityWithPictures> activities = (List<ActivityWithPictures>) getIntent().getSerializableExtra(getResources().getString(R.string.intent_extra_activities));
+        from = (Date) getIntent().getSerializableExtra(getResources().getString(R.string.intent_extra_from));
+        to = (Date) getIntent().getSerializableExtra(getResources().getString(R.string.intent_extra_to));
         ActivityAdapter adapter = new ActivityAdapter(activities, this, (position) -> {
             Intent intent = new Intent(this, DetailsActivity.class);
-            intent.putExtra(ACTIVITY_ARG, activities.get(position));
+            intent.putExtra(getResources().getString(R.string.intent_extra_activity), activities.get(position));
             startActivity(intent);
         });
         recyclerView.setAdapter(adapter);
@@ -46,7 +45,7 @@ public class UpcomingActivity extends AppCompatActivity {
         new RetrieveAllByDate(PlannerDatabase.getInstance(this), activities -> {
             ActivityAdapter adapter = new ActivityAdapter(activities, this, (position) -> {
                 Intent intent = new Intent(this, DetailsActivity.class);
-                intent.putExtra(ACTIVITY_ARG, activities.get(position));
+                intent.putExtra(getResources().getString(R.string.intent_extra_activity), activities.get(position));
                 startActivity(intent);
             });
             recyclerView.setAdapter(adapter);

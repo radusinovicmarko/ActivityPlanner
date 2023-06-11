@@ -33,6 +33,7 @@ import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 
 import java.io.Serializable;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -117,9 +118,24 @@ public class NewActivityActivity extends AppCompatActivity implements ActivityRe
 
         findViewById(R.id.addPicturesBtn).setOnClickListener(view -> {
             Intent intent = new Intent(this, AddPicturesActivity.class);
-            intent.putExtra("pictures", (Serializable) pictureUris);
+            intent.putExtra(getResources().getString(R.string.intent_extra_pictures), (Serializable) pictureUris);
             startAddPictures.launch(intent);
         });
+        new Thread(() -> {
+            if (!isInternetAvailable()) {
+                NewActivityActivity.this.runOnUiThread(() -> Toast.makeText(NewActivityActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show());
+            }
+        }).start();
+    }
+
+    private boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddress = InetAddress.getByName("google.com");
+            //You can replace it with your name
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     private void nextClick(View view) {
@@ -128,7 +144,6 @@ public class NewActivityActivity extends AppCompatActivity implements ActivityRe
         if (date == null || hours == null || minutes == null || location == null || title.isEmpty() || description.isEmpty()) {
             Toast.makeText(this, R.string.create_activity_error, Toast.LENGTH_SHORT).show();
         } else {
-            //TODO: fix deprecated
             date.setHours(hours);
             date.setMinutes(minutes);
             com.example.activityplanner.database.entities.Activity activity =
@@ -159,8 +174,7 @@ public class NewActivityActivity extends AppCompatActivity implements ActivityRe
                 if (result.getResultCode() == RESULT_OK) {
                     Intent intent = result.getData();
                     if (intent != null) {
-                        //TODO: fix hardcoded names
-                        pictureUris = (List<String>) intent.getSerializableExtra("pictures");
+                        pictureUris = (List<String>) intent.getSerializableExtra(getResources().getString(R.string.intent_extra_pictures));
                     }
                 }
             });

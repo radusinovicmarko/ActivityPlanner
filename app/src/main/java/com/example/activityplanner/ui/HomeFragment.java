@@ -60,7 +60,6 @@ public class HomeFragment extends Fragment {
         recyclerView = binding.activityList;
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        //TODO: On back from details activity change list
         calendarView.setOnDayClickListener(eventDay -> {
             Date date = eventDay.getCalendar().getTime();
             binding.dateSelectedTV.setVisibility(View.VISIBLE);
@@ -101,7 +100,7 @@ public class HomeFragment extends Fragment {
             binding.noItemsTv.setVisibility(View.GONE);
             ActivityAdapter adapter = new ActivityAdapter(activities, getContext(), (position) -> {
                 Intent intent = new Intent(getContext(), DetailsActivity.class);
-                intent.putExtra(ACTIVITY_ARG, activities.get(position));
+                intent.putExtra(getResources().getString(R.string.intent_extra_activity), activities.get(position));
                 startActivity(intent);
             });
             recyclerView.setAdapter(adapter);

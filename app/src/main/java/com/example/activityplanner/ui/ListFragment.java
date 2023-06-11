@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.activityplanner.R;
 import com.example.activityplanner.adapter.ActivityAdapter;
 import com.example.activityplanner.database.PlannerDatabase;
 import com.example.activityplanner.database.dto.ActivityWithPictures;
@@ -83,7 +84,7 @@ public class ListFragment extends Fragment {
         }
         ActivityAdapter adapter = new ActivityAdapter(activities, getContext(), (position) -> {
             Intent intent = new Intent(getContext(), DetailsActivity.class);
-            intent.putExtra(ACTIVITY_ARG, activities.get(position));
+            intent.putExtra(getResources().getString(R.string.intent_extra_activity), activities.get(position));
             startActivity(intent);
         });
         recyclerView.setAdapter(adapter);

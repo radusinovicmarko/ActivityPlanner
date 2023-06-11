@@ -20,6 +20,7 @@
         <item name="circle_icon">@drawable/ic_circle</item>
         <item name="left_arrow_icon">@drawable/ic_left_arrow</item>
         <item name="right_arrow_icon">@drawable/ic_right_arrow</item>
+        <item name="no_image_icon">@drawable/ic_no_image</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

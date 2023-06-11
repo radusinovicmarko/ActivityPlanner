@@ -1,10 +1,10 @@
 package com.example.activityplanner.ui;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentContainerView;
 
 import com.example.activityplanner.R;
 import com.example.activityplanner.database.PlannerDatabase;
@@ -27,8 +26,6 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class DetailsActivity extends AppCompatActivity {
-
-    private static final String ACTIVITY_ARG = "Activity";
     private int currentIndex = 0;
     private List<Picture> pictures;
 
@@ -37,7 +34,7 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        ActivityWithPictures activity = (ActivityWithPictures) getIntent().getSerializableExtra(ACTIVITY_ARG);
+        ActivityWithPictures activity = (ActivityWithPictures) getIntent().getSerializableExtra(getResources().getString(R.string.intent_extra_activity));
         pictures = activity.getPictures();
 
         TextView titleTV = findViewById(R.id.titleTV);
@@ -69,9 +66,9 @@ public class DetailsActivity extends AppCompatActivity {
         if (type == ActivityType.TRAVEL) {
             findViewById(R.id.fragment_container_view).setVisibility(View.VISIBLE);
             Bundle bundle = new Bundle();
-            bundle.putDouble("lat", activity.getActivity().getLocationLatitude());
-            bundle.putDouble("long", activity.getActivity().getLocationLongitude());
-            bundle.putString("name", activity.getActivity().getLocationName());
+            bundle.putDouble(getResources().getString(R.string.bundle_extra_lat), activity.getActivity().getLocationLatitude());
+            bundle.putDouble(getResources().getString(R.string.bundle_extra_long), activity.getActivity().getLocationLongitude());
+            bundle.putString(getResources().getString(R.string.bundle_extra_name), activity.getActivity().getLocationName());
 
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
@@ -108,13 +105,19 @@ public class DetailsActivity extends AppCompatActivity {
                 .setNegativeButton(android.R.string.no, null).show());
     }
 
+    @SuppressLint("ResourceType")
     private void loadCarousel() {
         if (pictures.size() == 0) {
             findViewById(R.id.carousel).setVisibility(View.GONE);
         } else {
             findViewById(R.id.carousel).setVisibility(View.VISIBLE);
             ImageView imageView = findViewById(R.id.imageView);
-            Picasso.get().load(pictures.get(currentIndex).getUri()).into(imageView);
+            int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+            if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
+                Picasso.get().load(pictures.get(currentIndex).getUri()).error(R.drawable.ic_no_image_dark).into(imageView);
+            } else {
+                Picasso.get().load(pictures.get(currentIndex).getUri()).error(R.drawable.ic_no_image).into(imageView);
+            }
         }
     }
 }

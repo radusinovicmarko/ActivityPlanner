@@ -61,4 +61,15 @@
 
     <string name="alert_delete_title">Delete activity</string>
     <string name="alert_delete_message">Are you sure?</string>
+
+    <string name="intent_extra_from" translatable="false">from</string>
+    <string name="intent_extra_to" translatable="false">to</string>
+    <string name="intent_extra_activities" translatable="false">activities</string>
+    <string name="intent_extra_activity" translatable="false">activity</string>
+    <string name="intent_extra_pictures" translatable="false">pictures</string>
+    <string name="bundle_extra_lat" translatable="false">lat</string>
+    <string name="bundle_extra_long" translatable="false">long</string>
+    <string name="bundle_extra_name" translatable="false">name</string>
+
+    <string name="no_internet_message">No Internet connection.</string>
 </resources>
