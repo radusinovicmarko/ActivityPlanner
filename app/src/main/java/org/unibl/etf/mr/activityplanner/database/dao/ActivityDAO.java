@@ -21,12 +21,16 @@ public interface ActivityDAO {
     List<ActivityWithPictures> getAllActivities();
 
     @Transaction
-    @Query("SELECT * FROM activity a WHERE a.title LIKE '%' || :title || '%' ORDER BY a.date")
-    List<ActivityWithPictures> getAllByTitle(String title);
+    @Query("SELECT * FROM activity a WHERE a.title LIKE '%' || :title || '%' AND a.date >= :from ORDER BY a.date")
+    List<ActivityWithPictures> getAllByTitle(String title, Date from);
 
     @Transaction
     @Query("SELECT * FROM activity a WHERE a.date >= :from AND a.date < :to")
     List<ActivityWithPictures> getAllByDate(Date from, Date to);
+
+    @Transaction
+    @Query("SELECT * FROM activity a WHERE a.date >= :from ORDER BY a.date")
+    List<ActivityWithPictures> getAllByDate(Date from);
 
     @Transaction
     @Insert

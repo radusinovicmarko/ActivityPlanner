@@ -17,11 +17,13 @@ import org.unibl.etf.mr.activityplanner.R;
 import org.unibl.etf.mr.activityplanner.adapter.ActivityAdapter;
 import org.unibl.etf.mr.activityplanner.database.PlannerDatabase;
 import org.unibl.etf.mr.activityplanner.database.dto.ActivityWithPictures;
+import org.unibl.etf.mr.activityplanner.services.RetrieveAllByDate;
 import org.unibl.etf.mr.activityplanner.services.RetrieveAllByTitleTask;
 import org.unibl.etf.mr.activityplanner.services.RetrieveAllTask;
 
 import org.unibl.etf.mr.activityplanner.databinding.FragmentListBinding;
 
+import java.util.Date;
 import java.util.List;
 
 public class ListFragment extends Fragment {
@@ -50,7 +52,7 @@ public class ListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         plannerDatabase = PlannerDatabase.getInstance(getContext());
-        new RetrieveAllTask(this::getActivities, plannerDatabase).execute();
+        new RetrieveAllByDate(plannerDatabase, this::getActivities).execute(new Date());
 
         SearchView searchView = binding.activitySearchView;
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -96,7 +98,7 @@ public class ListFragment extends Fragment {
         if (searchPattern != null) {
             new RetrieveAllByTitleTask(this::getActivities, plannerDatabase).execute(searchPattern);
         } else {
-            new RetrieveAllTask(this::getActivities, plannerDatabase).execute();
+            new RetrieveAllByDate(plannerDatabase, this::getActivities).execute(new Date());
         }
     }
 }

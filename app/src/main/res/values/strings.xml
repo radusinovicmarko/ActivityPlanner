@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Activity Planner</string>
+    <string name="app_name" translatable="false">Activity Planner</string>
     <string name="title_home">Calendar</string>
     <string name="title_dashboard">List</string>
     <string name="title_settings">Settings</string>

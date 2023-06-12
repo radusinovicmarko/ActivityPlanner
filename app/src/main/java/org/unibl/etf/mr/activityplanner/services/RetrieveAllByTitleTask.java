@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import org.unibl.etf.mr.activityplanner.database.PlannerDatabase;
 import org.unibl.etf.mr.activityplanner.database.dto.ActivityWithPictures;
 
+import java.util.Date;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -19,7 +20,7 @@ public class RetrieveAllByTitleTask extends AsyncTask<String, Void, List<Activit
 
     @Override
     protected List<ActivityWithPictures> doInBackground(String... strings) {
-        return database.getActivityDAO().getAllByTitle(strings[0]);
+        return database.getActivityDAO().getAllByTitle(strings[0], new Date());
     }
 
     @Override

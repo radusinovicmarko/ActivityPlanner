@@ -20,7 +20,11 @@ public class RetrieveAllByDate extends AsyncTask<Date, Void, List<ActivityWithPi
 
     @Override
     protected List<ActivityWithPictures> doInBackground(Date... dates) {
-        return database.getActivityDAO().getAllByDate(dates[0], dates[1]);
+        if (dates.length > 1) {
+            return database.getActivityDAO().getAllByDate(dates[0], dates[1]);
+        } else {
+            return database.getActivityDAO().getAllByDate(dates[0]);
+        }
     }
 
     @Override

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:padding="@dimen/new_activity_padding"
-    tools:context="org.unibl.activityplanner.org.unibl.etf.mr.activityplanner.ui.NewActivityActivity">
+    tools:context="org.unibl.etf.mr.activityplanner.ui.NewActivityActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
