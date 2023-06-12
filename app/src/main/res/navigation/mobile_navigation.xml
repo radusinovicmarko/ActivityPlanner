@@ -7,21 +7,21 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.activityplanner.ui.HomeFragment"
+        android:name="org.unibl.etf.mr.activityplanner.ui.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
     </fragment>
 
     <fragment
         android:id="@+id/navigation_list"
-        android:name="com.example.activityplanner.ui.ListFragment"
+        android:name="org.unibl.etf.mr.activityplanner.ui.ListFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_list" >
     </fragment>
 
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.example.activityplanner.ui.SettingsFragment"
+        android:name="org.unibl.etf.mr.activityplanner.ui.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
 

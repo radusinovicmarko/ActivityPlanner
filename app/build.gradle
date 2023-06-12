@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.activityplanner'
+    namespace 'org.unibl.etf.mr.activityplanner'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.activityplanner"
+        applicationId "org.unibl.etf.mr.activityplanner"
         minSdk 24
         targetSdk 33
         versionCode 1

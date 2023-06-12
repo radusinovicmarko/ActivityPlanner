@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="?actionBarSize"
-    tools:context=".ui.SettingsFragment">
+    tools:context="org.unibl.activityplanner.org.unibl.etf.mr.activityplanner.ui.SettingsFragment">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/settingsFragment"

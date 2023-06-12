@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_margin="10dp"
     android:fillViewport="true"
-    tools:context=".ui.AddPicturesActivity">
+    tools:context="org.unibl.activityplanner.org.unibl.etf.mr.activityplanner.ui.AddPicturesActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
