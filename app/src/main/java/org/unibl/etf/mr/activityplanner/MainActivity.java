@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
             sendNotification(option);
         }
         setLocale(getBaseContext());
-        recreate();
     }
 
     private void sendNotification(NotificationOption option) {
