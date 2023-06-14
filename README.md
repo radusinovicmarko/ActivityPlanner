@@ -1,7 +1,7 @@
 # ActivityPlanner
 Activity Planner Android App created for college project purposes.
 
-![ss01](https://github.com/radusinovicmarko/ActivityPlanner/assets/74877695/ebf0e370-cc06-46f5-aaf4-9e41816b076d)
+![ss01](https://github.com/radusinovicmarko/ActivityPlanner/assets/74877695/ebf0e370-cc06-46f5-aaf4-9e41816b076d = 200x200)
 
 ![ss02](https://github.com/radusinovicmarko/ActivityPlanner/assets/74877695/1cd01255-5149-463f-8b57-143e87660360)
 
